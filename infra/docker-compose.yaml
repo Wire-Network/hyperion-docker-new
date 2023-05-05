@@ -56,12 +56,17 @@ services:
     depends_on:
       setup:
         condition: service_healthy
+    deploy:
+      resources:
+        limits:
+          memory: 4G
     image: docker.elastic.co/elasticsearch/elasticsearch:${STACK_VERSION}
     volumes:
       - certs:/usr/share/elasticsearch/config/certs
-      - esdata01:/usr/share/elasticsearch/data
+      - es_data:/usr/share/elasticsearch/data
     ports:
-      - ${ES_PORT}:9200
+      - "9200:9200"
+      - "9300:9300"
     environment:
       - node.name=es01
       - cluster.name=${CLUSTER_NAME}
@@ -78,8 +83,9 @@ services:
       - xpack.security.transport.ssl.certificate=certs/es01/es01.crt
       - xpack.security.transport.ssl.certificate_authorities=certs/ca/ca.crt
       - xpack.security.transport.ssl.verification_mode=certificate
-      - xpack.license.self_generated.type=${LICENSE}
-    mem_limit: ${MEM_LIMIT}
+      - xpack.license.self_generated.type=basic
+      - xpack.monitoring.collection.enabled=true
+      - XPACK_ENCRYPTEDSAVEDOBJECTS_ENCRYPTIONKEY=${KIBANA_ENCRYPTION_KEY}
     ulimits:
       memlock:
         soft: -1
@@ -97,13 +103,19 @@ services:
       - hyperion
 
   kibana:
+    profiles:
+      - tools
+    deploy:
+      resources:
+        limits:
+          memory: 4G
     depends_on:
       es01:
         condition: service_healthy
     image: docker.elastic.co/kibana/kibana:${STACK_VERSION}
     volumes:
       - certs:/usr/share/kibana/config/certs
-      - kibanadata:/usr/share/kibana/data
+      - kibana_data:/usr/share/kibana/data
     ports:
       - ${KIBANA_PORT}:5601
     environment:
@@ -112,7 +124,8 @@ services:
       - ELASTICSEARCH_USERNAME=kibana_system
       - ELASTICSEARCH_PASSWORD=${KIBANA_PASSWORD}
       - ELASTICSEARCH_SSL_CERTIFICATEAUTHORITIES=config/certs/ca/ca.crt
-    mem_limit: ${MEM_LIMIT}
+      - monitoring.kibana.collection.enabled=true
+      - XPACK_ENCRYPTEDSAVEDOBJECTS_ENCRYPTIONKEY=${KIBANA_ENCRYPTION_KEY}
     healthcheck:
       test:
         [
@@ -132,17 +145,19 @@ services:
     volumes:
       - redis:/data
     ports:
-      - 6379:6379
+      - "6379:6379"
     networks:
       - hyperion
-  
+
   redis-commander:
+    profiles:
+      - tools
     image: rediscommander/redis-commander:latest
     restart: unless-stopped
     environment:
       - REDIS_HOSTS=local:redis:6379
     ports:
-      - 8089:8081
+      - "8089:8081"
     networks:
       - hyperion
 
@@ -157,16 +172,17 @@ services:
     volumes:
       - rabbitmq:/var/lib/rabbitmq
     ports:
-      - 15672:15672
+      - "5672:5672"
+      - "15672:15672"
     networks:
       - hyperion
 
 volumes:
   certs:
     driver: local
-  esdata01:
+  es_data:
     driver: local
-  kibanadata:
+  kibana_data:
     driver: local
   rabbitmq:
     driver: local

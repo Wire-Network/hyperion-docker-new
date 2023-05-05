@@ -1,2 +1,4 @@
+.idea
 ship/
 nodeos/leap/data
+ca.crt
