@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  leap-node:
+    container_name: leap-node
+    build: leap
+    image: leap-node
+    volumes:
+      - ./leap/data/:/nodeos/leap/data/
+      - ./leap/config/:/nodeos/leap/config/
+    ports:
+      - 38888:38888
+      - 38080:38080
+    networks:
+      - hyperion
+    command: nodeos --genesis-json /nodeos/leap/config/genesis.json --disable-replay-opts --data-dir /nodeos/leap/data --config-dir /nodeos/leap/config
+
+networks:
+  hyperion:
+    external: true

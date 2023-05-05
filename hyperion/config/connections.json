@@ -1,0 +1,34 @@
+{
+    "amqp": {
+      "host": "rabbitmq:5672",
+      "api": "rabbitmq:15672",
+      "protocol": "http",
+      "user": "rabbitmq",
+      "pass": "rabbitmq",
+      "vhost": "hyperion",
+      "frameMax": "0x10000"
+    },
+    "elasticsearch": {
+      "protocol": "https",
+      "host": "es01:9200",
+      "ingest_nodes": [
+        "es01:9200"
+      ],
+      "user": "elastic",
+      "pass": "changeme123"
+    },
+    "redis": {
+      "host": "redis",
+      "port": "6379"
+    },
+    "chains": {
+      "local": {
+        "name": "LocalNet",
+        "chain_id": "f7a3fe6bf7dc0b011e25cee41ed9526b70a9702ca74599692852304cb36fdb2b",
+        "http": "http://leap-node:38888",
+        "ship": "ws://leap-node:38080",
+        "WS_ROUTER_PORT": 7001,
+        "WS_ROUTER_HOST": "127.0.0.1"
+      }
+    }
+  }
