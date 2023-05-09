@@ -166,9 +166,9 @@ services:
     image: rabbitmq:3.11.15-management
     restart: on-failure
     environment:
-      - RABBITMQ_DEFAULT_USER=rabbitmq
-      - RABBITMQ_DEFAULT_PASS=rabbitmq
-      - RABBITMQ_DEFAULT_VHOST=hyperion
+      - RABBITMQ_DEFAULT_USER=${RABBITMQ_USER}
+      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_PASSWORD}
+      - RABBITMQ_DEFAULT_VHOST=${RABBITMQ_VHOST}
     volumes:
       - rabbitmq:/var/lib/rabbitmq
     ports:
