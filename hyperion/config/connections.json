@@ -1,34 +1,33 @@
 {
     "amqp": {
-      "host": "rabbitmq:5672",
-      "api": "rabbitmq:15672",
-      "protocol": "http",
-      "user": "rabbitmq",
-      "pass": "rabbitmq",
-      "vhost": "hyperion",
-      "frameMax": "0x10000"
+        "host": "rabbitmq:5672",
+        "api": "rabbitmq:15672",
+        "protocol": "http",
+        "user": "rabbitmq",
+        "pass": "rabbitmq",
+        "vhost": "hyperion",
+        "frameMax": "0x10000"
     },
     "elasticsearch": {
-      "protocol": "https",
-      "host": "es01:9200",
-      "ingest_nodes": [
-        "es01:9200"
-      ],
-      "user": "elastic",
-      "pass": "changeme123"
+        "protocol": "https",
+        "host": "es01:9200",
+        "ingest_nodes": [
+            "es01:9200"
+        ],
+        "user": "elastic",
+        "pass": "changeme123"
     },
     "redis": {
-      "host": "redis",
-      "port": "6379"
+        "host": "redis",
+        "port": "6379"
     },
     "chains": {
-      "local": {
-        "name": "LocalNet",
-        "chain_id": "f7a3fe6bf7dc0b011e25cee41ed9526b70a9702ca74599692852304cb36fdb2b",
-        "http": "http://leap-node:38888",
-        "ship": "ws://leap-node:38080",
-        "WS_ROUTER_PORT": 7001,
-        "WS_ROUTER_HOST": "127.0.0.1"
-      }
+        "local": {
+            "name": "Wire",
+            "chain_id": "de9943091e811bfb246ca243144b4d274886b959bbb17dd33d0bc97c745dbbe0",
+            "http": "https://swamprod.airwire.io",
+            "ship": "ws://swamprod.airwire.io:8080",
+            "WS_ROUTER_PORT": 7001
+        }
     }
-  }
+}
