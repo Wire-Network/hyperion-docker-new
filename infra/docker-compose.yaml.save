@@ -67,15 +67,18 @@ services:
       resources:
         limits:
           memory: 4G
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65535
+        hard: 65535
     image: docker.elastic.co/elasticsearch/elasticsearch:${STACK_VERSION}
     volumes:
       - certs:/usr/share/elasticsearch/config/certs
       - es_data:/usr/share/elasticsearch/data
-    logging:
-      driver: json-file
-      options:
-        max-size: "10m"
-        max-file: "3"
+    
     ports:
       - "9200:9200"
       - "9300:9300"

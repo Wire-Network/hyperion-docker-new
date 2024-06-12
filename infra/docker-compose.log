@@ -1,0 +1,25 @@
+Creating volume "infra_certs" with local driver
+Creating volume "infra_es_data" with local driver
+Creating volume "infra_kibana_data" with local driver
+Creating volume "infra_rabbitmq" with local driver
+Creating volume "infra_redis" with local driver
+Pulling setup (docker.elastic.co/elasticsearch/elasticsearch:8.7.1)...
+8.7.1: Pulling from elasticsearch/elasticsearch
+Digest: sha256:bfd17b9ba48b247c7c93f10ed18350d289ebf4a06bc10b928357a1bb8f923e08
+Status: Downloaded newer image for docker.elastic.co/elasticsearch/elasticsearch:8.7.1
+Pulling redis (redis:7.0.11-alpine)...
+7.0.11-alpine: Pulling from library/redis
+Digest: sha256:121bac949fb5f623b9fa0b4e4c9fb358ffd045966e754cfa3eb9963f3af2fe3b
+Status: Downloaded newer image for redis:7.0.11-alpine
+Pulling rabbitmq (rabbitmq:3.11.15-management)...
+3.11.15-management: Pulling from library/rabbitmq
+Digest: sha256:3257b9ebb42ed2b1962b2b32faa8b2aec56909e2c7d0661c3a8c1d5c79f2e001
+Status: Downloaded newer image for rabbitmq:3.11.15-management
+Creating redis ... 
+Creating infra_setup_1 ... 
+Creating rabbitmq      ... 
+Creating redis         ... done
+Creating infra_setup_1 ... done
+Creating rabbitmq      ... done
+Creating infra_es01_1  ... 
+Creating infra_es01_1  ... done
