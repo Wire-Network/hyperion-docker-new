@@ -61,7 +61,7 @@
     },
     "settings": {
         "preview": false,
-        "chain": "local",
+        "chain": "wire",
         "eosio_alias": "eosio",
         "parser": "3.2",
         "auto_stop": 0,

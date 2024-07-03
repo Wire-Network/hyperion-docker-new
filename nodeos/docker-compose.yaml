@@ -1,19 +1,21 @@
 version: '3.8'
 
 services:
-  leap-node:
-    container_name: leap-node
-    build: leap
-    image: leap-node
+  wire-node:
+    container_name: wire-node
+    build: ./wire  # Specify the directory containing the Dockerfile
+    image: wire-node  # Name of the image to be used or built
     volumes:
-      - ./leap/data/:/nodeos/leap/data/
-      - ./leap/config/:/nodeos/leap/config/
+      - ./wire/data/:/nodeos/wire/data/  # Mapping the data directory
+      - ./wire/config/:/nodeos/wire/config/  # Mapping the config directory
     ports:
-      - 38888:38888
-      - 38080:38080
+      - "38888:38888"  # External port for HTTP API requests
+      - "38080:38080"  # External port for state history plugin API
+      - "34444:34444"  # Mapped P2P network port
+      - "34443:34443"  # Additional mapped port for other services
     networks:
       - hyperion
-    command: nodeos --genesis-json /nodeos/leap/config/genesis.json --disable-replay-opts --data-dir /nodeos/leap/data --config-dir /nodeos/leap/config
+    command: nodeos --genesis-json /nodeos/wire/config/genesis.json --disable-replay-opts --data-dir /nodeos/wire/data --config-dir /nodeos/wire/config # Command to run nodeos
 
 networks:
   hyperion:

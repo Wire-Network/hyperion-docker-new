@@ -1,17 +1,20 @@
-version: "3.8"
 services:
   indexer:
-    build: .
-    # restart: on-failure
+    build:
+      context: ../../  # This sets the context to the 'projects' directory
+      dockerfile: hyperion-docker-new/hyperion/Dockerfile
     volumes:
       - ./config/connections.json:/hyperion-history-api/connections.json
       - ./config/chains/:/hyperion-history-api/chains/
+      - ../../hyperion-history-api:/hyperion-history-api  # Correct relative path
     networks:
       - hyperion
-    command: ./run.sh local-indexer
+    command: ./run.sh wire-indexer
 
   api:
-    build: .
+    build:
+      context: ../../  # This sets the context to the 'projects' directory
+      dockerfile: hyperion-docker-new/hyperion/Dockerfile
     ports:
       - "7000:7000"
     depends_on:
@@ -19,9 +22,10 @@ services:
     volumes:
       - ./config/connections.json:/hyperion-history-api/connections.json
       - ./config/chains/:/hyperion-history-api/chains/
+      - ../../hyperion-history-api:/hyperion-history-api  # Correct relative path
     networks:
       - hyperion
-    command: ./run.sh local-api
+    command: ./run.sh wire-api
 
 networks:
   hyperion:

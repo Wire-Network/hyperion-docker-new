@@ -22,7 +22,7 @@
         "port": "6379"
     },
     "chains": {
-        "local": {
+        "wire": {
             "name": "Wire Testnet",
             "chain_id": "3523eca96f08c0dd978f0bd527f64cd4327ab7ffce00d11daf97d0986a3f02b6",
             "http": "https://testnet.wire.foundation",
