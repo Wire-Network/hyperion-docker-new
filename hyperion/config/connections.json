@@ -25,8 +25,8 @@
         "wire": {
             "name": "Wire Testnet",
             "chain_id": "3523eca96f08c0dd978f0bd527f64cd4327ab7ffce00d11daf97d0986a3f02b6",
-            "http": "https://testnet.wire.foundation",
-            "ship": "ws://45.79.192.40:8080",
+            "http": "http://wire-node:38888",
+            "ship": "ws://wire-node:38080",
             "WS_ROUTER_PORT": 7001
         }
     }
