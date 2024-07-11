@@ -1,6 +1,7 @@
 .idea
 ship/
-nodeos/wire/data
+nodeos/*/data
+nodeos/*/config/protocol_features
 ca.crt
 
 

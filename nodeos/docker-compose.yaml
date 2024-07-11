@@ -1,11 +1,11 @@
 services:
   wire-node:
     container_name: wire-node
-    build: ./wire  # Specify the directory containing the Dockerfile
-    image: wire-node  # Name of the image to be used or built
+    build: ./wire
+    image: wire-node
     volumes:
-      - ./wire/data/:/nodeos/wire/data/  # Mapping the data directory
-      - ./wire/config/:/nodeos/wire/config/  # Mapping the config directory
+      - ./wire/data/:/nodeos/wire/data/ 
+      - ./wire/config/:/nodeos/wire/config/
     ports:
       - "38888:38888"  # External port for HTTP API requests
       - "38080:38080"  # External port for state history plugin API
