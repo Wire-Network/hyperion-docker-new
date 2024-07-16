@@ -1,3 +1,3 @@
 # @echo off
 cd nodeos
-docker compose up --build -d
+docker compose up -d
