@@ -37,7 +37,14 @@ node --version # Verify installation
 # Install cmake - latest version maintained by kitware https://apt.kitware.com/
 test -f /usr/share/doc/kitware-archive-keyring/copyright || wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | gpg --dearmor - | sudo tee /usr/share/keyrings/kitware-archive-keyring.gpg >/dev/null
 echo 'deb [signed-by=/usr/share/keyrings/kitware-archive-keyring.gpg] https://apt.kitware.com/ubuntu/ jammy main' | sudo tee /etc/apt/sources.list.d/kitware.list >/dev/null
+# Update packages
+sudo apt-get update
+# If kitware-archive-ring has NOT been installed previously remove manually obtained signing key.
+test -f /usr/share/doc/kitware-archive-keyring/copyright ||
+sudo rm /usr/share/keyrings/kitware-archive-keyring.gpg
+# Install key-ring for up to date keys
 sudo apt-get install kitware-archive-keyring
+# Can now install
 sudo apt-get install cmake
 cmake --version # Verify installation
 
