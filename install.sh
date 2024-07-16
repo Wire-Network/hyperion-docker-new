@@ -11,7 +11,7 @@ git clone https://gitea.gitgo.app/Wire/abieos
 git clone https://gitea.gitgo.app/Wire/node-abieos
 
 # Checkout wirejs branch of hyperioon-history-api
-cd $WORK_DIR/hyperion-history-api/ && git checkout wirejs && cd $WORK_DIR
+cd $WORK_DIR/hyperion-history-api/ && git checkout wirejs && npm i && cd $WORK_DIR
 
 # Prepare to install necessary dependencies
 sudo apt-get update && sudo apt install curl ca-certificates gpg wget
