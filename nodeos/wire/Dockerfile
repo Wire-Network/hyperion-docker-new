@@ -1,31 +1,16 @@
-FROM ubuntu:20.04
+# FOR LEAP v3.1.4
 
-ENV DEBIAN_FRONTEND=noninteractive
+FROM ubuntu:22.04
 
 # Update and install required packages
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    wget \
-    jq \
-    git \
-    build-essential \
-    cmake \
-    tzdata \
-    ca-certificates \
-    libtinfo5 \
-    libusb-1.0-0
+RUN apt-get update
+RUN apt-get update --fix-missing
+RUN DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get -y install tzdata
+RUN apt-get -y install zip unzip libncurses5 wget git build-essential cmake curl libcurl4-openssl-dev libgmp-dev libssl-dev libusb-1.0.0-dev libzstd-dev time pkg-config zlib1g-dev libtinfo-dev bzip2 libbz2-dev python3 file
 
-# Update CA certificates
-RUN update-ca-certificates
-
-# Download necessary Debian packages
-RUN wget http://launchpadlibrarian.net/361669149/libicu60_60.2-3ubuntu3_amd64.deb
-RUN wget http://security.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2.22_amd64.deb
-RUN wget --no-check-certificate -O /eosio.deb https://github.com/siliconswampio/wire-eosio/releases/download/v2.0.13/eosio_2.0.13-1_amd64.deb
+# # Download necessary Debian packages
+RUN wget -O /wire.deb https://files.siliconswamp.io/leap-3.1.5-ubuntu22.04-x86_64.deb
 
 # Install Debian packages
-RUN dpkg -i libicu60_60.2-3ubuntu3_amd64.deb
-RUN dpkg -i libssl1.1_1.1.1f-1ubuntu2.22_amd64.deb
-RUN dpkg -i /eosio.deb || apt-get install -f -y
-
-# Clean up
-RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN apt-get update
+RUN apt-get install -y ./wire.deb
