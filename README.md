@@ -55,3 +55,9 @@
     You can run ```docker logs -f hyperion-indexer-1``` you should see logs of it beginning to index the chain.
 
     NOTE: If you see pm2 messages and no indexing, double check that the ```hyperion-history-api``` directory has a ```node_modules```
+
+
+## License
+
+[FSL-1.1-Apache-2.0](./LICENSE.md)
+
