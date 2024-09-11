@@ -28,11 +28,11 @@
 
         Under "indexer", depending on your scenario can set "rewrite" to true if you want it to reindex on each start up. For development networks this could be useful.
 
-    c. nodeos > wire > config > ```config.ini```
+    c. nodeop > wire > config > ```config.ini```
 
         At the bottom p2p-peer-address, set this to an RPC for your network.
 
-    d. nodeos > wire > config > ```genesis.json```
+    d. nodeop > wire > config > ```genesis.json```
 
         Replace this with your chain's genesis.json
 
@@ -42,9 +42,9 @@
 
 5. We can now start all our containers.
 
-    a. First we will start up our nodeos process Run ```sudo ./start_nodeos.sh```
+    a. First we will start up our nodeop process Run ```sudo ./start_nodeop.sh```
 
-    You can check the logs to make sure you're nodeos process is syncing run ```docker logs -f wire-node``` press ctrl + C to get out of following the logs.
+    You can check the logs to make sure you're nodeop process is syncing run ```docker logs -f wire-node``` press ctrl + C to get out of following the logs.
 
     b. Now we will start up infra Run ```sudo ./start_infra.sh```
 
