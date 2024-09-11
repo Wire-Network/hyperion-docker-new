@@ -1,3 +1,3 @@
 # @echo off
-cd nodeos
+cd nodeop
 docker compose up -d
