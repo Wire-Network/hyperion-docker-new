@@ -62,7 +62,7 @@
     "settings": {
         "preview": false,
         "chain": "wire",
-        "eosio_alias": "eosio",
+        "sysio_alias": "sysio",
         "parser": "3.2",
         "auto_stop": 0,
         "index_version": "v1",

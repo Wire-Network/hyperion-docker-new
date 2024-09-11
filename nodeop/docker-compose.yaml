@@ -4,11 +4,11 @@ services:
     build: ./wire
     image: wire-node
     volumes:
-      - ./wire/data/:/nodeos/wire/data/ 
-      - ./wire/config/:/nodeos/wire/config/
+      - ./wire/data/:/nodeop/wire/data/ 
+      - ./wire/config/:/nodeop/wire/config/
     network_mode: "host"
     # ports:
-    #   # - "9000:9000"  # Leap bootstrap peering nodes - eosio
+    #   # - "9000:9000"  # Leap bootstrap peering nodes - sysio
     #   # - "9001:9001"  # Leap bootstrap peering nodes - producer111a
     #   # - "9002:9002"  # Leap bootstrap peering nodes - producer111b
     #   # - "9003:9003"  # Leap bootstrap peering nodes - producer111c
@@ -18,7 +18,7 @@ services:
     #   - "4443:4443"  # Additional mapped port for other services
     # networks:
     #   - hyperion
-    command: nodeos --genesis-json /nodeos/wire/config/genesis.json --disable-replay-opts --data-dir /nodeos/wire/data --config-dir /nodeos/wire/config --delete-all-blocks # Command to run nodeos
+    command: nodeop --genesis-json /nodeop/wire/config/genesis.json --disable-replay-opts --data-dir /nodeop/wire/data --config-dir /nodeop/wire/config --delete-all-blocks # Command to run nodeop
 
 networks:
   hyperion:

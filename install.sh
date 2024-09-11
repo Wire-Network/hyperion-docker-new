@@ -1,14 +1,14 @@
 #!/bin/bash
-# git clone https://gitea.gitgo.app/Wire/hyperion-docker-new.git
+# git clone https://github.com/Wire-Network/hyperion-docker-new.git
 
 WORK_DIR=/opt
 
 cd $WORK_DIR
 
 # Clone Repos
-git clone https://gitea.gitgo.app/Wire/hyperion-history-api.git
-git clone https://gitea.gitgo.app/Wire/abieos
-git clone https://gitea.gitgo.app/Wire/node-abieos
+git clone https://github.com/Wire-Network/hyperion-history-api.git
+git clone https://github.com/Wire-Network/abieos
+git clone https://github.com/Wire-Network/node-abieos
 
 # Checkout wirejs branch of hyperioon-history-api
 cd $WORK_DIR/hyperion-history-api/ && git checkout wirejs && npm i && cd $WORK_DIR
