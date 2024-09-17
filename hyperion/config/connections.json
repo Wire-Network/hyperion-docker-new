@@ -24,9 +24,9 @@
     "chains": {
         "wire": {
             "name": "Wire Devnet Leap",
-            "chain_id": "0000000000000000000000000000000000000000000000000000000000000000",
-            "http": "http://wire-node:8888",
-            "ship": "ws://wire-node:8080",
+            "chain_id": "60fb0eb4742886af8a0e147f4af6fd363e8e8d8f18bdf73a10ee0134fec1c551",
+            "http": "http://192.168.50.141:8888",
+            "ship": "ws://192.168.50.141:8080",
             "WS_ROUTER_PORT": 7001
         }
     }
