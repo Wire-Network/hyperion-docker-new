@@ -1,22 +1,37 @@
-# Use a specific version of node that is compatible with your project
 FROM node:20
 
-# Install pm2 globally
+# Install PM2 globally
 RUN npm install pm2 -g
 
-# Set the working directory inside the container
+# Install necessary tools for building node-abieos
+RUN apt-get update && apt-get install -y cmake g++
+
+# Clone the main repository recursively to include submodules
+RUN git clone --recursive https://github.com/Wire-Network/hyperion-history-api.git
+
+# Build the node-abieos submodule
+WORKDIR /hyperion-history-api/addons/node-abieos
+RUN git checkout rename
+RUN git submodule update --init --recursive
+RUN npm install
+RUN npm run build:linux:ci
+
+# Switch back to the main hyperion-history-api directory
 WORKDIR /hyperion-history-api
-
-# COPY the local hyperion-history-api directory into the container
-COPY ./hyperion-history-api/ /hyperion-history-api/
-
-# Install dependencies
+RUN git checkout main
 RUN npm install
 
-
+## CUSTOM hyperion-history-api at sister directory level
 # FROM node:20
+
+# # Install pm2 globally
 # RUN npm install pm2 -g
-# RUN git clone --recursive https://github.com/Wire-Network/hyperion-history-api
+
+# # Set the working directory inside the container
 # WORKDIR /hyperion-history-api
-# RUN git checkout main
+
+# # COPY the local hyperion-history-api directory into the container
+# COPY ./hyperion-history-api/ /hyperion-history-api/
+
+# # Install dependencies
 # RUN npm install
