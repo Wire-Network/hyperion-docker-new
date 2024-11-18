@@ -11,14 +11,12 @@ RUN git clone --recursive https://github.com/Wire-Network/hyperion-history-api.g
 
 # Build the node-abieos submodule
 WORKDIR /hyperion-history-api/addons/node-abieos
-
 RUN git submodule update --init --recursive
 RUN npm install
 RUN npm run build:linux:ci
 
 # Switch back to the main hyperion-history-api directory
 WORKDIR /hyperion-history-api
-RUN git checkout main
 RUN npm install
 
 ## CUSTOM hyperion-history-api at sister directory level

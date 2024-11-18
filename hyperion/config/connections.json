@@ -23,10 +23,10 @@
     },
     "chains": {
         "wire": {
-            "name": "Wire Devnet Leap",
-            "chain_id": "60fb0eb4742886af8a0e147f4af6fd363e8e8d8f18bdf73a10ee0134fec1c551",
-            "http": "http://192.168.50.141:8888",
-            "ship": "ws://192.168.50.141:8080",
+            "name": "Wire Devnet",
+            "chain_id": "d06acae4e2ae21346cd7cffb820cd06eb1ad2b9f37303b3c2a4d93c2841cb31a",
+            "http": "http://192.168.50.176:8888",
+            "ship": "ws://192.168.50.176:8080",
             "WS_ROUTER_PORT": 7001
         }
     }
