@@ -2,62 +2,95 @@
 
 ## Setup Instructions
 
-1. Clone this repo into /opt/
-    
-    Then cd into the directory
+1. Clone this repo into `/opt/` and after run `cd hyperion-docker-new`.
+2. Run install command:
 
-2. Run ```sudo ./install.sh```
+    ```sh
+    sudo ./install.sh
+    ```
 
-    This will prompt you to restart the system upon completing. `MUST` restart before continuing.
-    Once the system has rebooted, connect to the server again and ```cd /opt/hyperion-docker-new```
+    This will prompt you to restart the system upon completing and you **must** restart before continuing.
+    Once the system has rebooted, connect to the server again.
 
-    NOTE: check inside hyperion-history-api and ensure that you see a node_modules folder, if not cd into hyperion-history-api and run ```npm i```
+3. Update your chain config
 
-3. We will now update configs to work with your chain 
+    a. hyperion > config > `connections.json`: update `wire` settings in the `chains` object.
 
-    a. hyperion > config > ```connections.json```: update "wire" settings in the "chains" object.
-        
-        1. name - set this to your chains name
-        2. chain_id - set this to match your chain's chain id, should be located in YOUR chain's genesis.json
-    
+    - `name` - set this to your chains name
+    - `chain_id` - set this to match your chain's chainId (you could find it in your chain's `genesis.json`
+
     b. hyperion > config > chains> ```wire.config.json```
 
-        This file effects swagger docs and other hyperion configs. Can leave most of this alone.
+    This file affects swagger docs and other hyperion configs, most likely there isn't anything to be tweaked or change there except:
 
-        Under "api" set "custom_core_token" to whatever your network's core token symbol is.
+    - Under `api` set `custom_core_token` to whatever your network's core token symbol is.
 
-        Under "indexer", depending on your scenario can set "rewrite" to true if you want it to reindex on each start up. For development networks this could be useful.
+    - Under `indexer`, depending on your scenario can set `rewrite` to *true* if you want it to reindex on each start up which is useful for development networks.
 
-    c. nodeop > wire > config > ```config.ini```
+    c. nodeop > wire > config > `config.ini`
 
-        At the bottom p2p-peer-address, set this to an RPC for your network.
+    - `p2p-peer-address` - set this to an RPC for your network.
 
     d. nodeop > wire > config > ```genesis.json```
 
-        Replace this with your chain's genesis.json
+    - Replace this with your chain's genesis.json
 
-4. Now ```cd /opt/hyperion-docker-new``` and run ```sudo ./init.sh``` 
+4. Create `hyperion` network:
 
-    This will create the hyperion docker group
+     ```sh
+     cd /opt/hyperion-docker-new
+     sudo ./init.sh
+     ```
 
-5. We can now start all our containers.
+5. Start all containers in a sequential order:
 
-    a. First we will start up our nodeop process Run ```sudo ./start_nodeop.sh```
+    a. Start `nodeop`
 
-    You can check the logs to make sure you're nodeop process is syncing run ```docker logs -f wire-node``` press ctrl + C to get out of following the logs.
+    - First we will start up our `nodeop` process by running ```sudo ./start_nodeop.sh```
 
-    b. Now we will start up infra Run ```sudo ./start_infra.sh```
+      - You can check the logs to make sure that `nodeop` is syncing:  run ```docker logs -f wire-node``` press *ctrl + C* to get out of following the logs.
 
-    You can run ```docker logs -f infra-es01-1``` to watch the logs.
+    b. Setup infra containers(elasticsearch, kibana, redis)
 
-    c. And finally we will start up Hyperion Run ```sudo ./start_hyperion.sh```
+     ```sh
+     sudo ./start_infra.sh
+     ```
 
-    You can run ```docker logs -f hyperion-indexer-1``` you should see logs of it beginning to index the chain.
+     - You can run ```docker logs -f infra-es01-1``` to watch the logs.
+     - Inspect Kibana port on `http://localhost:5601` - there you can create different indices of the data and run query commands.
 
-    NOTE: If you see pm2 messages and no indexing, double check that the ```hyperion-history-api``` directory has a ```node_modules```
+       - Default user: `elastic`
+       - Password: `changeme123`
 
+    c. Start up Hyperion
+
+     ```sh
+     sudo ./start_hyperion.sh
+     ```
+
+     - You can run ```docker logs -f hyperion-indexer-1``` you should see logs of it beginning to index the chain.
+
+If everything was setup correctly when inspecting logs of `hyperion-api-1` container you should see:
+
+```log
+@timestamp [TAILING] Tailing last 10 lines for [wire-api] process (change the value with --lines option)
+@timestamp /root/.pm2/logs/wire-api-out.log last 10 lines:
+@timestamp /root/.pm2/logs/wire-api-error.log last 10 lines:
+@timestamp: [26 - 00_master] --------- Hyperion API 3.3.10 ---------
+@timestamp: [26 - 00_master] Chain API URL: <chain-api-url> | Push API URL: "undefined"
+@timestamp: Importing stream module...
+@timestamp: [26 - 00_master] [SocketManager] chain_id: d06acae4e2ae21346cd7cffb820cd06eb1ad2b9f37303b3c2a4d93c2841cb31a
+@timestamp: [26 - 00_master] Socket.IO via uWS started on port 1234
+@timestamp: [26 - 00_master] Websocket manager loaded!
+@timestamp: [26 - 00_master] starting relay - http://127.0.0.1:7001
+@timestamp: [26 - 00_master] Last commit hash on this branch is: 9f0b276a12f6c29c695fc5750b4fb4fabd71bf01
+@timestamp: [26 - 00_master] Chain API validated!
+@timestamp: [26 - 00_master] Elasticsearch: 8.7.1 | Lucene: 9.5.0
+@timestamp: [26 - 00_master] Elasticsearch validated!
+@timestamp: [26 - 00_master] Registering plugins...
+@timestamp: [26 - 00_master] wire Hyperion API ready and listening on http://0.0.0.0:7000
+```
 
 ## License
 
 [FSL-1.1-Apache-2.0](./LICENSE.md)
-
