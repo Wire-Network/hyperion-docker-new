@@ -17,7 +17,7 @@
     a. hyperion > config > `connections.json`: update `wire` settings in the `chains` object.
 
     - `name` - set this to your chains name
-    - `chain_id` - set this to match your chain's chainId (you could find it in your chain's `genesis.json`
+    - `chain_id` - `curl <CHAIN_API_RPC>/v1/chain/get_info | jq .`
 
     b. hyperion > config > chains> ```wire.config.json```
 
@@ -42,7 +42,7 @@
      sudo ./init.sh
      ```
 
-5. Start all containers in a sequential order:
+5. Start all containers in a **sequential** order:
 
     a. Start `nodeop`
 
@@ -90,6 +90,29 @@ If everything was setup correctly when inspecting logs of `hyperion-api-1` conta
 @timestamp: [26 - 00_master] Registering plugins...
 @timestamp: [26 - 00_master] wire Hyperion API ready and listening on http://0.0.0.0:7000
 ```
+
+## Resources
+
+- [Chain config example](https://hyperion.docs.eosrio.io/providers/setup/chain/?h=chain#example)
+
+## Troubleshooting
+
+### `wire-node` not syncing/starting
+
+- verify that you've updated `genesis.json` in `nodeop/wire/config`
+- ensure you have modified `chain_id` in `hyperion/config/chains/wire.config.json`  - `curl <CHAIN_API_RPC>/v1/chain/get_info | jq .chain_id`
+- you have cleared the contents of  `nodeop/data` before starting `wire-node` container
+
+### `wire-node` not peering
+
+**Error messages:**
+
+```sh
+error 2024-12-03T19:03:04.763 net-1     net_plugin.cpp:2355           operator()           ] connection failed to 0.0.0.0:0 Connection refused
+error 2024-12-03T19:03:04.763 net-4     net_plugin.cpp:2355           operator()           ] connection failed to 0.0.0.0:0 
+```
+
+**Solution**: Verify you have at least **one valid** `p2p-peer-address` declared in `nodeop/wire/config/config.ini`
 
 ## License
 
