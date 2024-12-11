@@ -24,9 +24,9 @@
     "chains": {
         "wire": {
             "name": "Wire Devnet",
-            "chain_id": "d06acae4e2ae21346cd7cffb820cd06eb1ad2b9f37303b3c2a4d93c2841cb31a",
-            "http": "http://192.168.50.176:8888",
-            "ship": "ws://192.168.50.176:8080",
+            "chain_id": "f35fb8a6431245b33457a2982dc511da162b5d92ab1c08161c587538b1a20523",
+            "http": "https://det-dev.gitgo.app",
+            "ship": "ws://dev-hist.gitgo.app",
             "WS_ROUTER_PORT": 7001
         }
     }

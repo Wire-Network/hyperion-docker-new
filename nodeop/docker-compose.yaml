@@ -7,17 +7,6 @@ services:
       - ./wire/data/:/nodeop/wire/data/ 
       - ./wire/config/:/nodeop/wire/config/
     network_mode: "host"
-    # ports:
-    #   - "8888:8888"  # External port for HTTP API requests
-    #   - "8080:8080"  # External port for state history plugin API
-    #   - "4444:4444"  # Mapped P2P network port
-    #   - "4443:4443"  
-    #   - "9100:9000"  # Change host port for peering
-    #   - "9101:9001"
-    #   - "9102:9002"
-    #   - "9103:9003"
-    # networks:
-    #   - hyperion
     command: nodeop --genesis-json /nodeop/wire/config/genesis.json --disable-replay-opts --data-dir /nodeop/wire/data --config-dir /nodeop/wire/config --delete-all-blocks # Command to run nodeop
 
 networks:
