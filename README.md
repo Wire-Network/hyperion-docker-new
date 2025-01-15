@@ -1,4 +1,4 @@
-# Hyperion Setup and Install
+# Hyperion Setup
 
 ## Setup Instructions
 
@@ -6,11 +6,10 @@
 2. Run install command:
 
     ```sh
-    sudo ./install.sh
+    sudo ./prepare.sh
     ```
 
-    This will prompt you to restart the system upon completing and you **must** restart before continuing.
-    Once the system has rebooted, connect to the server again.
+    This installs the docker dependencies.
 
 3. Update your chain config
 
