@@ -7,7 +7,7 @@ services:
       - ./wire/data/:/nodeop/wire/data/ 
       - ./wire/config/:/nodeop/wire/config/
     network_mode: "host"
-    command: nodeop --genesis-json /nodeop/wire/config/genesis.json --disable-replay-opts --data-dir /nodeop/wire/data --config-dir /nodeop/wire/config --delete-all-blocks # Command to run nodeop
+    command: nodeop --genesis-json /nodeop/wire/config/genesis.json --data-dir /nodeop/wire/data --config-dir /nodeop/wire/config --disable-replay-opts # Command to run nodeop
 
 networks:
   hyperion:

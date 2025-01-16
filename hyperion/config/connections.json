@@ -23,10 +23,17 @@
     },
     "chains": {
         "wire": {
-            "name": "Wire Devnet",
-            "chain_id": "f35fb8a6431245b33457a2982dc511da162b5d92ab1c08161c587538b1a20523",
-            "http": "https://det-dev.gitgo.app",
-            "ship": "ws://dev-hist.gitgo.app",
+            "name": "Wire Testnet",
+            "chain_id": "065dcca2dc758af25bcf3b878260a19dd1b81e4597f2af15a262a0c67f1e0106",
+            "http": "http://50.116.42.116:8888",
+            "ship": "ws://50.116.42.116:8080",
+            "WS_ROUTER_PORT": 7001
+        },
+        "wire-external": {
+            "name": "Wire Testnet",
+            "chain_id": "065dcca2dc758af25bcf3b878260a19dd1b81e4597f2af15a262a0c67f1e0106",
+            "http": "https://testnet-00.wire.foundation",
+            "ship": "ws://testnet-ship.wire.foundation",
             "WS_ROUTER_PORT": 7001
         }
     }
