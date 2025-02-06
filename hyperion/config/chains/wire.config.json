@@ -1,12 +1,12 @@
 {
     "api": {
-        "chain_name": "Wire Testnet",
+        "chain_name": "Wire Devnet",
         "server_addr": "0.0.0.0",
         "server_port": 7000,
-        "server_name": "testnet-hyperion.wire.foundation",
+        "server_name": "dev-hyperion.gitgo.app",
         "provider_name": "Wire",
         "provider_url": "http://wire.network",
-        "chain_api": "https://testnet-00.wire.foundation",
+        "chain_api": "https://det-dev.gitgo.app",
         "chain_logo_url": "https://ipfs.airwire.io/ipfs/QmTRZjhJ3sdK3C256eD6ZibzRcC3XPsadw3Dp1awwezF9a",
         "enable_caching": true,
         "cache_life": 1,
