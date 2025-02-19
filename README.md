@@ -2,66 +2,69 @@
 
 ## Setup Instructions
 
-1. Clone this repo into `/opt/` and after run `cd hyperion-docker-new`.
-2. Run install command:
+1. Clone and enter this repo `git clone https://github.com/Wire-Network/hyperion-docker-new && cd hyperion-docker-new`.
+2. Install dependencies:
 
     ```sh
     sudo ./prepare.sh
     ```
 
-    This installs the docker dependencies.
-
-3. Update your chain config
-
-    a. hyperion > config > `connections.json`: update `wire` settings in the `chains` object.
+3. Update Configuration files:
+   
+    a. `hyperion > config > connections.json`: update `wire` settings in the `chains` object. Here you will configure a connection to a Wire API node where the state history plugin (SHIP) is enabled and accessable via websocket. You can either run this wire nodeop container alongisde this hyperion stack, or simply reference an external API node with available state history plugin (default port 8080 via ws://).
 
     - `name` - set this to your chains name
-    - `chain_id` - `curl <CHAIN_API_RPC>/v1/chain/get_info | jq .`
+    - `chain_id` - Chain ID string of the wire chain you are configuring. Retrieve with `/v1/chain/get_info > chain_id`
+    - `http` - Standard Chain API Url (typically port 8888)
+    - `ship` - State History Plugin websocket endpoint (typically port 8080 via ws://)
 
-    b. hyperion > config > chains> ```wire.config.json```
+    b. `hyperion > config > chains > wire.config.json`
 
     This file affects swagger docs and other hyperion configs, most likely there isn't anything to be tweaked or change there except:
 
-    - Under `api` set `custom_core_token` to whatever your network's core token symbol is.
+    - `api > custom_core_token` to whatever your network's core token symbol is. Default is SYS
+    - `api > server_name`: for the swagger code samples, instead of using <IP>:<port> format which attaches HTTPS in the beggining and breaks the code sample
+    - `api > server_addr`: set to 0.0.0.0 - the value for the server that hosts the Hyperion indexer, which also provides the API. Since both are on the same machine, it is localhost.
+    - `indexer > rewrite` to *true* if you want it to reindex on each start up which is useful for development networks.
+    - As you get deeper into hyperion configurations, you can explore tweaking the indexer configs and beyond.
+      
+    <br>
+    
+   > At this point, if you have a healthy node with available state history plugin and do not wish to use this docker stack's nodeop container as your chain ingestor, you can skip to step 4. Otherwise, continue with c and d to configure Wire chain-api peering node container.
+   
+    c. `nodeop > wire > config > config.ini`
 
-    - Under `indexer`, depending on your scenario can set `rewrite` to *true* if you want it to reindex on each start up which is useful for development networks.
+    - `p2p-peer-address` - set least 1 RPC peering address for your network 
 
-    c. nodeop > wire > config > `config.ini`
+    d. `nodeop > wire > config > genesis.json`
 
-    - `p2p-peer-address` - set this to an RPC for your network.
+    - Replace this with your chain's genesis.json retrieved from your genesis node
 
-    d. nodeop > wire > config > ```genesis.json```
-
-    - Replace this with your chain's genesis.json
-
-4. Create `hyperion` network:
+4. Create new local docker network called `hyperion`:
 
      ```sh
-     cd /opt/hyperion-docker-new
      sudo ./init.sh
      ```
 
-5. Start all containers in a **sequential** order:
+5. Start each container group **in sequential order**: (nodeop > infra > hyperion)
 
-    a. Start `nodeop`
+    a. Optional - if you are using this stack's wire nodeop container for ingesting:
 
-    - First we will start up our `nodeop` process by running ```sudo ./start_nodeop.sh```
+    - Start up our `nodeop` process by running `sudo ./start_nodeop.sh`
+    - Check the logs to make sure that `nodeop` is syncing with your network: run ```docker logs -f wire-node``` press *ctrl + C* to get out of following the logs.
+    - This is essentially just a wire chain-api node peering with your network and serving chain data via websocket to your hyperion indexer container.
+    > Wait for your nodeop container to sync fully with your network before continuing.
 
-      - You can check the logs to make sure that `nodeop` is syncing:  run ```docker logs -f wire-node``` press *ctrl + C* to get out of following the logs.
-
-    b. Setup infra containers(elasticsearch, kibana, redis)
+    b. Setup infrastructure containers (elasticsearch, kibana, redis, etc)
 
      ```sh
      sudo ./start_infra.sh
      ```
 
-     - You can run ```docker logs -f infra-es01-1``` to watch the logs.
-     - Inspect Kibana port on `http://localhost:5601` - there you can create different indices of the data and run query commands.
+     - Then run ```docker logs -f infra-es01-1``` to watch the logs.
+    > Wait for shard status to change from [RED] to [GREEN] before continuing.
 
-       - Default user: `elastic`
-       - Password: `changeme123`
-
-    c. Start up Hyperion
+    c. Start up Hyperion Indexer & API containers
 
      ```sh
      sudo ./start_hyperion.sh
@@ -89,6 +92,11 @@ If everything was setup correctly when inspecting logs of `hyperion-api-1` conta
 @timestamp: [26 - 00_master] Registering plugins...
 @timestamp: [26 - 00_master] wire Hyperion API ready and listening on http://0.0.0.0:7000
 ```
+
+Your Hyperion History API should now be available at http://<IP>:7000/v2/health. 
+Also, check out the Swaggar OpenAPI spec docs at this url: http://<IP>:7000/v2/docs
+
+Healthy example for Wire Testnet: [https://testnet-hyperion.wire.foundation/v2/health](https://testnet-hyperion.wire.foundation/v2/health) / [https://testnet-hyperion.wire.foundation/v2/docs](https://testnet-hyperion.wire.foundation/v2/docs)
 
 ## Resources
 
