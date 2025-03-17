@@ -3,27 +3,43 @@ services:
     build:
       context: ../../
       dockerfile: hyperion-docker-new/hyperion/Dockerfile
+    environment:
+      RABBITMQ_USER: ${RABBITMQ_USER}
+      RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD}
+      RABBITMQ_VHOST: ${RABBITMQ_VHOST}
+      ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
     volumes:
-      - ./config/connections.json:/hyperion-history-api/connections.json
+      - ./config/connections.template.json:/hyperion-history-api/connections.template.json
       - ./config/chains/:/hyperion-history-api/chains/
     networks:
       - hyperion
-    command: ./run.sh wire-indexer
+    command: >
+      bash -c "envsubst < /hyperion-history-api/connections.template.json > /hyperion-history-api/connections.json &&
+               ./run.sh wire-indexer"
 
   api:
     build:
       context: ../../
       dockerfile: hyperion-docker-new/hyperion/Dockerfile
+    environment:
+      RABBITMQ_USER: ${RABBITMQ_USER}
+      RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD}
+      RABBITMQ_VHOST: ${RABBITMQ_VHOST}
+      ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
     ports:
       - "7000:7000"
     depends_on:
       - indexer
     volumes:
-      - ./config/connections.json:/hyperion-history-api/connections.json
+      - ./config/connections.template.json:/hyperion-history-api/connections.template.json
       - ./config/chains/:/hyperion-history-api/chains/
     networks:
       - hyperion
-    command: ./run.sh wire-api
+    command: >
+      bash -c "envsubst < /hyperion-history-api/connections.template.json > /hyperion-history-api/connections.json &&
+               ./run.sh wire-api"
 
 networks:
   hyperion:

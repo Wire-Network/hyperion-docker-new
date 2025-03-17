@@ -4,4 +4,9 @@ nodeop/*/data
 nodeop/*/config/protocol_features
 ca.crt
 
+.env
+*.save
+*.swp
 
+*logs.txt
+*.log
