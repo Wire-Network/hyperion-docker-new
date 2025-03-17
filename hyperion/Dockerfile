@@ -3,8 +3,8 @@ FROM node:20
 # Install PM2 globally
 RUN npm install pm2 -g
 
-# Install necessary tools for building node-abieos
-RUN apt-get update && apt-get install -y cmake g++
+# Install necessary tools for building node-abieos and envsubst (gettext-base)
+RUN apt-get update && apt-get install -y cmake g++ gettext-base
 
 # Clone the main repository recursively to include submodules
 RUN git clone --recursive https://github.com/Wire-Network/hyperion-history-api.git

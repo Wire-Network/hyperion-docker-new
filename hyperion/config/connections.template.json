@@ -3,9 +3,9 @@
         "host": "rabbitmq:5672",
         "api": "rabbitmq:15672",
         "protocol": "http",
-        "user": "rabbitmq",
-        "pass": "rabbitmq",
-        "vhost": "hyperion",
+        "user": "${RABBITMQ_USER}",
+        "pass": "${RABBITMQ_PASSWORD}",
+        "vhost": "${RABBITMQ_VHOST}",
         "frameMax": "0x10000"
     },
     "elasticsearch": {
@@ -15,11 +15,12 @@
             "es01:9200"
         ],
         "user": "elastic",
-        "pass": "changeme123"
+        "pass": "${ELASTIC_PASSWORD}"
     },
     "redis": {
         "host": "redis",
-        "port": "6379"
+        "port": "6379",
+        "password": "${REDIS_PASSWORD}"
     },
     "chains": {
         "wire": {
