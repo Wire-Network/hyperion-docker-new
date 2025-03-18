@@ -3,13 +3,22 @@
 ## Setup Instructions
 
 1. Clone and enter this repo `git clone https://github.com/Wire-Network/hyperion-docker-new && cd hyperion-docker-new`.
-2. Install dependencies:
+
+2. Configure Environment Variables
+    ```
+    cp .env.template .env
+    nano .env
+    ```
+    
+Edit the .env file to provide appropriate values for your setup.
+
+3. Install dependencies:
 
     ```sh
     sudo ./prepare.sh
     ```
 
-3. Update Configuration files:
+4. Update Configuration files:
    
     a. `hyperion > config > connections.json`: update `wire` settings in the `chains` object. Here you will configure a connection to a Wire API node where the state history plugin (SHIP) is enabled and accessable via websocket. You can either run this wire nodeop container alongisde this hyperion stack, or simply reference an external API node with available state history plugin (default port 8080 via ws://).
 
@@ -40,17 +49,22 @@
 
     - Replace this with your chain's genesis.json retrieved from your genesis node
 
-4. Create new local docker network called `hyperion`:
+5. Create new local docker network called `hyperion`:
 
      ```sh
      sudo ./init.sh
      ```
 
-5. Start each container group **in sequential order**: (nodeop > infra > hyperion)
+6. Start each container group **in sequential order**: (nodeop > infra > hyperion)
 
     a. Optional - if you are using this stack's wire nodeop container for ingesting:
 
-    - Start up our `nodeop` process by running `sudo ./start_nodeop.sh`
+    - Start up our `nodeop` process by running:
+
+    ```sh
+    `sudo ./start_nodeop.sh`
+    ```
+    
     - Check the logs to make sure that `nodeop` is syncing with your network: run ```docker logs -f wire-node``` press *ctrl + C* to get out of following the logs.
     - This is essentially just a wire chain-api node peering with your network and serving chain data via websocket to your hyperion indexer container.
     > Wait for your nodeop container to sync fully with your network before continuing.
