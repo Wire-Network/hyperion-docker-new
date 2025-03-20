@@ -10,7 +10,7 @@
     nano .env
     ```
     
-Edit the .env file to provide appropriate values for your setup.
+Edit the .env file to provide appropriate values for your setup. You **must** change KIBANA_ENCRYPTION_KEY to a UUID. Grab one from [here](https://www.uuidgenerator.net/).
 
 3. Install dependencies:
 
