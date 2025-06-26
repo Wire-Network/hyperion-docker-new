@@ -23,18 +23,11 @@
         "password": "${REDIS_PASSWORD}"
     },
     "chains": {
-        "wire-internal": {
-            "name": "Wire Testnet",
-            "chain_id": "065dcca2dc758af25bcf3b878260a19dd1b81e4597f2af15a262a0c67f1e0106",
-            "http": "http://50.116.42.116:8888",
-            "ship": "ws://50.116.42.116:8080",
-            "WS_ROUTER_PORT": 7001
-        },
         "wire": {
-            "name": "Wire Testnet",
-            "chain_id": "065dcca2dc758af25bcf3b878260a19dd1b81e4597f2af15a262a0c67f1e0106",
-            "http": "https://testnet-00.wire.foundation",
-            "ship": "ws://testnet-ship.wire.foundation",
+            "name": "Wire Devnet",
+            "chain_id": "8a9decac8a9a42a4bf67440535a31d2ad9412ba8eea3104477166260d92cf3b0",
+            "http": "http://192.168.50.176:8888",
+            "ship": "ws://192.168.50.176:8080",
             "WS_ROUTER_PORT": 7001
         }
     }
