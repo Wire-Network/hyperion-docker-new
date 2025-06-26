@@ -45,7 +45,7 @@
     "indexer": {
         "enabled": true,
         "node_max_old_space_size": 4096,
-        "start_on": 1,
+        "start_on": 10877992,
         "stop_on": 0,
         "rewrite": false,
         "purge_queues": true,

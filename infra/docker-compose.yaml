@@ -166,23 +166,11 @@ services:
     image: rediscommander/redis-commander:latest
     restart: unless-stopped
     environment:
-      # - REDIS_HOSTS=local:redis:6379
-      # - REDIS_HOSTS=local:redis:6379/0?password=${REDIS_PASSWORD}
-      # - REDIS_HOSTS=redis://:${REDIS_PASSWORD}@redis:6379/0
-      # - REDIS_HOSTS=local:redis:6379
-      # - REDIS_PASSWORD=${REDIS_PASSWORD}
-      # - REDIS_HOSTS=[{"name":"local","host":"redis","port":6379,"password":"${REDIS_PASSWORD}"}]
-      # - REDIS_HOSTS="[ { \"name\": \"local\", \"host\": \"redis\", \"port\": 6379, \"password\": \"${REDIS_PASSWORD}\", \"db\": 0 } ]"
-      # - NO_DEFAULT=1
-      # REDIS_HOSTS: '[{"name": "local", "host": "redis", "port": 6379, "password": "${REDIS_PASSWORD}", "db": 0}]'
-      # NO_DEFAULT: "true"
       REDIS_HOST: redis
       REDIS_PORT: "6379"
       REDIS_DB: "0"
       REDIS_PASSWORD: ${REDIS_PASSWORD}
       NO_DEFAULT: "true"
-    # command: >
-    #   node ./bin/redis-commander --redis-host redis --redis-port 6379 --redis-db 0 --redis-password ${REDIS_PASSWORD}
     ports:
       - "8089:8081"
     networks:
