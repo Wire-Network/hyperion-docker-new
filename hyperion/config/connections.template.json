@@ -24,10 +24,10 @@
     },
     "chains": {
         "wire": {
-            "name": "Wire Devnet",
-            "chain_id": "8a9decac8a9a42a4bf67440535a31d2ad9412ba8eea3104477166260d92cf3b0",
-            "http": "http://192.168.50.176:8888",
-            "ship": "ws://192.168.50.176:8080",
+            "name": "Wire Sysio Devnet",
+            "chain_id": "7adc45ccbaac1f39dfa832b35de30ea9ed93ff5c2dffb929aa16e242e1a80e0f",
+            "http": "https://wire-sysio-chain-api.dev.wire-dev.com",
+            "ship": "ws://wire-sysio-ship.dev.wire-dev.com:8080",
             "WS_ROUTER_PORT": 7001
         }
     }
