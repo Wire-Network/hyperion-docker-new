@@ -1,7 +1,7 @@
 {
-  "initial_timestamp": "2026-02-24T22:21:00.000",
-  "initial_key": "SYS52y6zKdxhVAVFh1z72TG7vw5VkSn4G3mqp8LAhuGcfY3Wid3rB",
-  "initial_finalizer_key": "PUB_BLS_eKYm6Z0BdBnQZSUGjmOfSd8z9dLfgK59iaDdC-2ZSY2u7VaFj1Arjn_6eqURBmYW2KcMqv9RNbh_U7D6pr0QS8aRQ1HyxnOhtMwk8Y9z1tFm-6s7q4KjNMENVSieXkELDno77A",
+  "initial_timestamp": "2026-03-02T19:18:45.000",
+  "initial_key": "SYS6WYFoh1QBkr9FrRcShkyeDTLHHqHTwiYMaqTeGDXXfu2qmqfT4",
+  "initial_finalizer_key": "PUB_BLS__P_Y4-Erl2gILto6JXGQVVxOtDGakzdWPoom1CplDIotDhYGPvwnuDJrqOnCHaIO3a9xemavyEJIEp3l290_XF0tsLQ-yJwP_JjFMXpOKB8vMDF2SEJQSgL2aCeeZVsKReWy3w",
   "initial_configuration": {
     "max_block_net_usage": 1048576,
     "target_block_net_usage_pct": 1000,
@@ -21,5 +21,5 @@
     "max_inline_action_depth": 4,
     "max_authority_depth": 6
   },
-  "initial_chain_id": "6d16c20c76e0e558cf4975400f6dfe7ca21af2afc91158761fccdc00027d408a"
+  "initial_chain_id": "af0d51c07022fac43023a05011f8cdd1b0cec938cd262ec742b6b489c0c136d5"
 }
