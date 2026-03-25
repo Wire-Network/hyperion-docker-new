@@ -24,17 +24,10 @@
     },
     "chains": {
         "wire": {
-            "name": "Wire Testnet",
-            "chain_id": "065dcca2dc758af25bcf3b878260a19dd1b81e4597f2af15a262a0c67f1e0106",
-            "http": "http://50.116.42.116:8888",
-            "ship": "ws://50.116.42.116:8080",
-            "WS_ROUTER_PORT": 7001
-        },
-        "wire-external": {
-            "name": "Wire Testnet",
-            "chain_id": "065dcca2dc758af25bcf3b878260a19dd1b81e4597f2af15a262a0c67f1e0106",
-            "http": "https://testnet-00.wire.foundation",
-            "ship": "ws://testnet-ship.wire.foundation",
+            "name": "Wire Sysio Devnet",
+            "chain_id": "a53ac16673f6baf13b439d350e21dc8c37de7691ef4f287beca894dc23fdec34",
+            "http": "https://wire-sysio-chain-api.dev.wire-dev.com",
+            "ship": "ws://wire-sysio-ship.dev.wire-dev.com:8080",
             "WS_ROUTER_PORT": 7001
         }
     }
