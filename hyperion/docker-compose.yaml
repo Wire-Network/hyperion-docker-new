@@ -30,6 +30,7 @@ services:
       REDIS_PASSWORD: ${REDIS_PASSWORD}
     ports:
       - "7000:7000"
+      - "1234:1234"  
     depends_on:
       - indexer
     volumes:

@@ -25,7 +25,7 @@
     "chains": {
         "wire": {
             "name": "Wire Sysio Devnet",
-            "chain_id": "a53ac16673f6baf13b439d350e21dc8c37de7691ef4f287beca894dc23fdec34",
+            "chain_id": "b802ee6b5ece1b80e97b2072dccab5248991b0a726733b25a6f3ff2592fe64d1",
             "http": "https://wire-sysio-chain-api.dev.wire-dev.com",
             "ship": "ws://wire-sysio-ship.dev.wire-dev.com:8080",
             "WS_ROUTER_PORT": 7001
